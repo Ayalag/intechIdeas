@@ -1,0 +1,44 @@
+2.	Write a PostresSQL query that takes the data from 2 tables and outputs “user’s name”, “user’s id” and “user’s client name”.  The tables are named “users” and “clients”.  “users” contains the columns id, name, password, username, client_id as columns.  clients contains id, name, address, city, state, zip_code.  Each column of the output should be properly labeled as indicated in the initial request.
+
+CREATE TABLE clients (
+        id int PRIMARY KEY,
+        name TEXT NOT NULL,
+        address TEXT,
+        city TEXT,
+        state TEXT,
+        zip_code TEXT
+    );
+
+    INSERT INTO clients (name, address, city, state, zip_code)
+    VALUES ('Julissa', 'Villa Zaita', 'Panama', 'Panama', '123312'),
+           ('Arturo', 'Don Bosco', 'Panama', 'Panama', '442123'),
+           ('Moises', 'Mañanitas', 'Panama', 'Panama', '333212'),
+		   ('Prestan', 'Juan Diaz.', 'Panama', 'Panama', '333212'),
+		   ('Arel', 'Santa Librada', 'Panama', 'Panama', '333212'),
+		   ('Johanna', 'Rio de jesus', 'Panama', 'Santiago', '333212');
+
+	CREATE TABLE users (
+        id int PRIMARY KEY,
+        name TEXT NOT NULL,
+        password TEXT NOT NULL,
+        username TEXT NOT NULL UNIQUE,
+		client_id INT NOT NULL,
+        FOREIGN KEY (client_id)
+            REFERENCES clients(id)
+    )
+    INSERT INTO users (client_id, name, password, username)
+    VALUES (1, 'Julissa Munoz', crypt('fsfsdf', gen_salt('md5')), 'jmunoz'),
+           (2, 'Arturo Castro', crypt('sdafewqe', gen_salt('md5')), 'acastro'),
+           (2, 'Moises Figueroa', crypt('hjkjkjl', gen_salt('md5')), 'mfigueroa'),
+           (2, 'Cristhian Prestan', crypt('klbmc', gen_salt('md5')), 'cprestan'),
+           (3, 'Arel Rodriguez', crypt('43erfhg', gen_salt('md5')), 'arodriguez'),
+           (4, 'Johanna Lopez', crypt('gjk8iuiyjf', gen_salt('md5')), 'jlopez')
+
+
+
+3.	Now, take your output from question 2.  Assume that there are multiple users per client.  Display the “number of users” and “client name” for each client.
+
+SELECT COUNT(*) as "number of users", clients.name as "client's name"
+FROM users
+INNER JOIN clients ON client_id=clients.id
+GROUP BY clients.id
