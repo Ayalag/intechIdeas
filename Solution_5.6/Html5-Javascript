@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<style>
+    form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color:#1F3862;
+        width: 25%;
+        padding: 20px;
+        margin: auto;
+    }
+
+    #nbt-label{
+        color: #E97824;
+        text-transform: uppercase;
+    }
+    .btn_action{
+        margin-top: 1rem;
+    }
+
+</style>
+<body>
+    <form onsubmit="return mySubmit(event)">
+        <label id="nbt-label" for="nbt">new button text</label>
+        <input type="text" name="text" id="nbt">
+        <button id="ctn_button" class="btn_action">Click Me</button>
+    </form>
+
+<script>
+const btn = document.getElementById("ctn_button");
+
+function mySubmit(e) {   
+    var txt = document.getElementById("nbt").value;
+  e.preventDefault(); 
+  try {
+      if(txt){
+        btn.innerText = txt;
+      }else{
+        btn.innerText = 'Click Me';
+      }
+  } catch (e) {
+   throw new Error(e.message);
+  }
+  return false;
+}
+</script>
+
+</body>
+</html>
+
+
