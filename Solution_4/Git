@@ -1,0 +1,18 @@
+4.	Explain how you would make a copy of our production codebase so that you can begin developing a new feature from a project plan and how you would share your work with the world as production software.  Please use exact commands for starting your work, preparing for review, and getting it deployed.
+
+Assuming that we are using github
+
+git clone 'To clone the repository from the server'
+Then implement the new requirements performing the a/b Test on the additional code implement by me 
+commit my changes and push them to the remote repository.
+
+git add 
+git commit -m 'Message to describe the change made'
+git push origin
+
+check always if there are any changes in the production branch before commiting 
+git fetch origin
+git merge origin/master
+
+If everything was approved then  
+git pull
